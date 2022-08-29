@@ -32,6 +32,12 @@ export const Input = styled.TextInput`
     border-color: red;
 `;
 export const ViewButton = styled.View`
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; 
     margin-top: 50px;
     padding: 20px;
+    align-items: center;
+    padding: 5px;
 `;

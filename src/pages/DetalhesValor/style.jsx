@@ -10,8 +10,14 @@ export const Container = styled.View`
 
   
 export const ViewButton = styled.View`
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; 
     margin-top: 50px;
     padding: 20px;
+    align-items: center;
+    padding: 5px;
 `;
 
 export const Input = styled.TextInput`

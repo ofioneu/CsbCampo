@@ -8,6 +8,7 @@ import DetalhesValor from './src/pages/DetalhesValor';
 import Maquina from './src/pages/Maquina';
 import Origem from './src/pages/Origem';
 
+
 const Stack = createNativeStackNavigator();
 
 export default function App(){
@@ -15,6 +16,7 @@ export default function App(){
     <NavigationContainer>
       <DataProvider>
       <Stack.Navigator>
+          
         <Stack.Screen 
         name="Origem" 
         component={Origem} 
@@ -33,17 +35,24 @@ export default function App(){
         name="Cliente" 
         component={Cliente} 
         options={{
-          title:'Cliente'
+          title:'Cliente',
+          headerShown: false,
         }}
         />
 
       <Stack.Screen 
         name="Maquina"
         component={Maquina}
+        options={{
+          headerShown: false,
+        }}
         />
          <Stack.Screen 
         name="DetalhesValor"
         component={DetalhesValor}
+        options={{
+          headerShown: false,
+        }}
         />
       </Stack.Navigator>
       </DataProvider>

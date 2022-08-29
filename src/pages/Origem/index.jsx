@@ -1,5 +1,6 @@
-import React, { useState, useEffect} from 'react';
-import {Button, View} from 'react-native';
+import React, { useState, useEffect, useContext} from 'react';
+import { DataContext } from '../../../contexts/data';
+import {Button} from 'react-native';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 import { Label, CheckboxView, ViewButton, Container, Title } from './style';
@@ -12,6 +13,8 @@ export default function Origem(){
   const [am, setAm] = useState(false)
   const [showElementSp, setShowElementSp] = useState(true)
   const [showElementAm, setShowElementAm] = useState(true)
+  const {data, setData} = useContext(DataContext)
+
 
   useEffect(
     function showOrHide(){
@@ -31,10 +34,17 @@ export default function Origem(){
     },[sp,am])
   
   
-  
   const navigation = useNavigation();
 
   function navegaCliente(){
+    if(sp){
+      setData({sp: sp})
+    }
+    if(am){
+      setData({am: am})
+    }
+    // console.log('SP',sp)
+    console.log('Data',data)
     navigation.navigate('Cliente')
   }
 
