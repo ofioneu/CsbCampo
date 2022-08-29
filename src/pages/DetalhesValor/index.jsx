@@ -9,21 +9,21 @@ export default function DetalhesValor() {
   const navigation = useNavigation();
   const [textDescription, setTextDescription] = useState();
   const [textParts, setTextParts] = useState();
-  const [detalhesValorData, setDeyalhesValorData] = useState([]);
 
   const { data, setData } = useContext(DataContext)
 
 
   function submit() {
-    setDeyalhesValorData({
+  
+    setData({...data,
       textDescription: textDescription,
-      textParts: textParts
+      textParts: textParts    
     })
 
-    setData([data, ...detalhesValorData])
-
-
-    navigation.dispatch(StackActions.popToTop())
+    Object.keys(data).forEach((item)=>{
+      console.log(item + ' : ' + data[item])
+    })
+    // navigation.dispatch(StackActions.popToTop())
 
   }
 
@@ -38,16 +38,16 @@ export default function DetalhesValor() {
       <Title>
         <Label>Serviços:</Label>
       </Title>
-      <Label> Descrição:</Label>
+      <Label> Descrição  E VALORES:</Label>
       <Input
         multiline={true}
-        onChange={description => setTextDescription(description)}
-        placeholder='Maquina 1: Trocar valvula EXV'
+        onChangeText={description => setTextDescription(description)}
+        placeholder='Maquina 1: Trocar valvula EXV =  5000,00'
       />
       <Label> Peças:</Label>
       <Input
         multiline={true}
-        onChange={parts => setTextDescription(parts)}
+        onChangeText={parts => setTextParts(parts)}
         placeholder='1 valvula EXV'
       />
 

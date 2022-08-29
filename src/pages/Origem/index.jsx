@@ -1,101 +1,103 @@
-import React, { useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { DataContext } from '../../../contexts/data';
-import {Button} from 'react-native';
+import { Button } from 'react-native';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 import { Label, CheckboxView, ViewButton, Container, Title } from './style';
 
 import { useNavigation } from '@react-navigation/native';
 
-export default function Origem(){
+export default function Origem() {
 
   const [sp, setSp] = useState(false)
   const [am, setAm] = useState(false)
   const [showElementSp, setShowElementSp] = useState(true)
   const [showElementAm, setShowElementAm] = useState(true)
-  const {data, setData} = useContext(DataContext)
+  const { data, setData } = useContext(DataContext)
 
 
   useEffect(
-    function showOrHide(){
-      if(sp){
-      setShowElementAm(false)
+    function showOrHide() {
+      if (sp) {
+        setShowElementAm(false)
       }
-      else{
+      else {
         setShowElementAm(true)
       }
 
-      if(am){
+      if (am) {
         setShowElementSp(false)
       }
-      else{
+      else {
         setShowElementSp(true)
       }
-    },[sp,am])
-  
-  
+    }, [sp, am])
+
+
   const navigation = useNavigation();
 
-  function navegaCliente(){
-    if(sp){
-      setData({sp: sp})
+  function navegaCliente() {
+    if (sp) {
+      setData({...data,  sp: sp })
     }
-    if(am){
-      setData({am: am})
+    if (am) {
+      setData({...data,  am: am })
     }
-    // console.log('SP',sp)
-    console.log('Data',data)
+   Object.keys(data).forEach((item)=>{
+      console.log(item + ' : ' + data[item])
+    })
     navigation.navigate('Cliente')
+
   }
 
-  return(
+  return (
     <Container>
 
       <Title>
         <Label>Origem?</Label>
       </Title>
 
-     <CheckboxView>
-      
       <CheckboxView>
-      { showElementSp?
-      <BouncyCheckbox 
-      textStyle={{
-        textDecorationLine: "none",
-      }}
-      size={25}
-      fillColor="red"
-      unfillColor="#FFFFFF"
-      text="São Paulo"
-      iconStyle={{ borderColor: "blue" }}
-      iconInnerStyle={{ borderWidth: 2 }}     
-      onPress={() => {sp? setSp(false): setSp(true)}} />
-      :null}
-   </CheckboxView>
 
-      <CheckboxView>
-        { showElementAm? 
-      <BouncyCheckbox
-      textStyle={{
-        textDecorationLine: "none",
-      }}
-      size={25}
-      fillColor="red"
-      unfillColor="#FFFFFF"
-      text="Amazonas"
-      iconStyle={{ borderColor: "red" }}
-      iconInnerStyle={{ borderWidth: 2 }}
-      onPress={() => {am? setAm(false): setAm(true)}} />
+        <CheckboxView>
+          {showElementSp ?
+            <BouncyCheckbox
+              textStyle={{
+                textDecorationLine: "none",
+              }}
+              size={25}
+              fillColor="red"
+              unfillColor="#FFFFFF"
+              text="São Paulo"
+              iconStyle={{ borderColor: "blue" }}
+              iconInnerStyle={{ borderWidth: 2 }}
+              onPress={() => { sp ? setSp(false) : setSp(true) }} />
+            : null}
+        </CheckboxView>
 
-    :null}
-     </CheckboxView>
-      
+        <CheckboxView>
+          {showElementAm ?
+            <BouncyCheckbox
+              textStyle={{
+                textDecorationLine: "none",
+              }}
+              size={25}
+              fillColor="red"
+              unfillColor="#FFFFFF"
+              text="Amazonas"
+              iconStyle={{ borderColor: "red" }}
+              iconInnerStyle={{ borderWidth: 2 }}
+              onPress={() => { am ? setAm(false) : setAm(true) }} />
+
+            : null}
+        </CheckboxView>
+
       </CheckboxView>
 
       <ViewButton>
-      <Button  title="PROXIMO" onPress={ navegaCliente } />
+        <Button title="PROXIMO" onPress={navegaCliente} />
       </ViewButton>
-          
+
     </Container>
   )
 }

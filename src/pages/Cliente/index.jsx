@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Container, Title, Label, Input, ViewButton, ImageBackground } from './style';
-import { View, Text, StyleSheet, Button, SafeAreaView, TextInput } from 'react-native';
+import { StyleSheet, Button, TextInput } from 'react-native';
 import { TextInputMask } from 'react-native-masked-text'
 import { useNavigation } from '@react-navigation/native';
 import { DataContext } from '../../../contexts/data';
@@ -21,14 +21,16 @@ export default function Cliente() {
 
   function navegaMaquina() {
     navigation.navigate('Maquina')
-    setClientData({
+   
+    setData({...data, 
       clienteName: clienteName,
       cnpj: cnpj,
       contactName: contactName,
       email: email
     })
-
-    setData(clientData)
+    Object.keys(data).forEach((item)=>{
+      console.log(item + ' : ' + data[item])
+    })
   }
 
 
@@ -45,7 +47,7 @@ export default function Cliente() {
       <Label> Nome:</Label>
       <Input
         placeholder='Nome do Cliente'
-        onChange={textNameCliente => setClienteName(textNameCliente)}
+        onChangeText={textNameCliente => setClienteName(textNameCliente)}
       />
 
       <Label>CNPJ:</Label>
@@ -59,7 +61,7 @@ export default function Cliente() {
       <Label> Nome do contato:</Label>
       <TextInput style={styles.input}
         placeholder='Luiz da manutenção'
-        onChange={textContactName => setContactName(textContactName)}
+        onChangeText={textContactName => setContactName(textContactName)}
       />
       <Label> E-mail:</Label>
       <TextInput style={styles.input}
