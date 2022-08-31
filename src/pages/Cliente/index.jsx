@@ -7,14 +7,7 @@ import { DataContext } from '../../../contexts/data';
 
 export default function Cliente() {
 
-  const [clienteName, setClienteName] = useState('')
-  const [cnpj, setCnpj] = useState('')
-  const [contactName, setContactName] = useState('')
-  const [email, setEmail] = useState('')
-  const [clientData, setClientData] = useState({})
   const { data, setData } = useContext(DataContext)
-
-
 
 
   const navigation = useNavigation();
@@ -22,12 +15,6 @@ export default function Cliente() {
   function navegaMaquina() {
     navigation.navigate('Maquina')
    
-    setData({...data, 
-      clienteName: clienteName,
-      cnpj: cnpj,
-      contactName: contactName,
-      email: email
-    })
     Object.keys(data).forEach((item)=>{
       console.log(item + ' : ' + data[item])
     })
@@ -35,7 +22,18 @@ export default function Cliente() {
 
 
   function toBack() {
+    setData({...data, 
+      origem: null,
+      clientName: null,
+      cnpj: null,
+      contactName: null,
+      email: null
+    })
     navigation.navigate('Origem')
+
+    Object.keys(data).forEach((item)=>{
+      console.log(item + ' : ' + data[item])
+    })
   }
 
 
@@ -46,28 +44,30 @@ export default function Cliente() {
       </Title>
       <Label> Nome:</Label>
       <Input
+        value={data.clientName}
         placeholder='Nome do Cliente'
-        onChangeText={textNameCliente => setClienteName(textNameCliente)}
+        onChangeText={e => {setData({...data, clientName: e})}}
       />
 
       <Label>CNPJ:</Label>
       <TextInputMask style={styles.input}
-        value={cnpj}
-        onChangeText={textCnpj => setCnpj(textCnpj)}
+        value={data.cnpj}
+        onChangeText={e => {setData({...data, cnpj: e})}}
         type={'cnpj'}
         placeholder='36.196.281/0001-47'
 
       />
       <Label> Nome do contato:</Label>
       <TextInput style={styles.input}
+        value={data.contactName}
         placeholder='Luiz da manutenção'
-        onChangeText={textContactName => setContactName(textContactName)}
+        onChangeText={e => {setData({...data, contactName: e})}}
       />
       <Label> E-mail:</Label>
       <TextInput style={styles.input}
-        value={email}
+        value={data.email}
         autoCapitalize='none'
-        onChangeText={text => setEmail(text)}
+        onChangeText={e => {setData({...data, email: e})}}
         placeholder='juca@empresa.com.br'
       />
 

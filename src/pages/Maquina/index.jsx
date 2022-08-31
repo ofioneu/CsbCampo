@@ -8,18 +8,11 @@ import { useNavigation } from '@react-navigation/native';
 export default function Maquina() {
 
   const { data, setData } = useContext(DataContext)
-  const [modelMachine, setModelMachine] = useState('')
-  const [seriesMachine, setSeriesMachine] = useState('')
   const navigation = useNavigation();
 
   function navegaDetalhesValor() {
 
-    setData({...data,
-      modelMachine: modelMachine,
-      seriesMachine: seriesMachine,
-    })
-
-    Object.keys(data).forEach((item)=>{
+    Object.keys(data).forEach((item) => {
       console.log(item + ' : ' + data[item])
     })
     navigation.navigate('DetalhesValor')
@@ -27,7 +20,18 @@ export default function Maquina() {
   }
 
   function toBack() {
+    setData({...data, 
+      modelMachine: null,
+      seriesMachine: null,
+    })
+
+    Object.keys(data).forEach((item)=>{
+      console.log(item + ' : ' + data[item])
+    })
+
     navigation.navigate('Cliente')
+
+    
   }
 
 
@@ -38,12 +42,16 @@ export default function Maquina() {
       </Title>
       <Label> Modelos das maquinas:</Label>
       <Input
-        onChangeText={textModelMachine => setModelMachine(textModelMachine)}
+        multiline={true}
+        value={data.modelMachine}
+        onChangeText={e => {setData({...data, modelMachine: e})}}
         placeholder='30GXE358386S; 30XAS250386S; etc..'
       />
       <Label> Series das maquinas:</Label>
       <Input
-        onChangeText={textSeriesMachine => setSeriesMachine(textSeriesMachine)}
+        multiline={true}
+        value={data.seriesMachine}
+        onChangeText={e => {setData({...data, seriesMachine: e})}}
         placeholder='Series das maquinas'
       />
 

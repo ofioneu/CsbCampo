@@ -7,28 +7,28 @@ import { useNavigation, StackActions } from '@react-navigation/native';
 
 export default function DetalhesValor() {
   const navigation = useNavigation();
-  const [textDescription, setTextDescription] = useState();
-  const [textParts, setTextParts] = useState();
-
   const { data, setData } = useContext(DataContext)
 
 
   function submit() {
-  
-    setData({...data,
-      textDescription: textDescription,
-      textParts: textParts    
-    })
 
-    Object.keys(data).forEach((item)=>{
+     Object.keys(data).forEach((item) => {
       console.log(item + ' : ' + data[item])
     })
-    // navigation.dispatch(StackActions.popToTop())
+    navigation.dispatch(StackActions.popToTop())
 
   }
 
 
   function toBack() {
+    setData({...data, 
+      description: null,
+      parts: null
+    })
+
+    Object.keys(data).forEach((item)=>{
+      console.log(item + ' : ' + data[item])
+    })
     navigation.navigate('Maquina')
   }
 
@@ -41,13 +41,15 @@ export default function DetalhesValor() {
       <Label> Descrição  E VALORES:</Label>
       <Input
         multiline={true}
-        onChangeText={description => setTextDescription(description)}
+        value={data.description}
+        onChangeText={e => {setData({...data, description: e})}}
         placeholder='Maquina 1: Trocar valvula EXV =  5000,00'
       />
       <Label> Peças:</Label>
       <Input
+        value={data.parts}
         multiline={true}
-        onChangeText={parts => setTextParts(parts)}
+        onChangeText={e => {setData({...data, parts: e})}}
         placeholder='1 valvula EXV'
       />
 

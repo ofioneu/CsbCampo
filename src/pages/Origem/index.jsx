@@ -38,10 +38,16 @@ export default function Origem() {
 
   function navegaCliente() {
     if (sp) {
-      setData({...data,  sp: sp })
+      setData({...data,  origem: 'SP' })
+    }
+    else{
+      setAm(false)
     }
     if (am) {
-      setData({...data,  am: am })
+      setData({...data,  origem: 'AM' })
+    }
+    else{
+      setSp(false)
     }
    Object.keys(data).forEach((item)=>{
       console.log(item + ' : ' + data[item])
