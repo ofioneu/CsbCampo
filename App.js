@@ -2,6 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import DataProvider from './contexts/data';
+import Toast from 'react-native-toast-message';
 
 import Cliente from './src/pages/Cliente';
 import DetalhesValor from './src/pages/DetalhesValor';
@@ -16,7 +17,7 @@ export default function App(){
     <NavigationContainer>
       <DataProvider>
       <Stack.Navigator>
-          
+                  
         <Stack.Screen 
         name="Origem" 
         component={Origem} 
@@ -56,6 +57,7 @@ export default function App(){
         />
       </Stack.Navigator>
       </DataProvider>
+      <Toast/>
     </NavigationContainer>
   );
 }
